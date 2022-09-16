@@ -61,7 +61,6 @@ function Read() {
                   onClick={() => onDelete(data.id)}
                 >Delete</button></td>
               </tr>
-
             )
           })}
         </tbody>

@@ -31,7 +31,6 @@ const DarkMode = () => {
       theme = darkTheme;
     }
   };
-
   return (
     <button
       className={theme === "dark" ? clickedClass : ""}
