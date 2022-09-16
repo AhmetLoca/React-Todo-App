@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Create from './components/Create';
+import Update from './components/Update';
+import React, { useState } from 'react'
+import "./styles/App.css";
+import DarkMode from "./components/DarkMode";
+
+
 
 function App() {
+  const [name, setName] = useState(null);
+
+  const userName = (e) => {
+    e.preventDefault();
+    /*
+    Button tusuna bastıgımızda varsayılan davranısıyla sayfamız yenileniyor. Bunu onlemek için buttonun varsayılan davranısı durduruyoruz.
+     */
+    const userData = {
+      name,
+    };
+    localStorage.setItem('token-info', JSON.stringify(userData.name));
+    setName('');
+
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+
+      <nav>
+        <DarkMode />
+      </nav>
+      {
+
+        <div className="addName">
+          <form>
+            <div>
+              <input
+                placeholder="Lütfen isim giriniz"
+                className="todo-input"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+              <button className="todo-button" type="submit" onClick={userName}>
+                User Name
+              </button>
+            </div>
+
+          </form>
+        </div>
+      }
+      <Routes>
+        <Route path="/" element={<Create />} />
+        <Route path="/update" element={<Update />} />
+      </Routes>
+    </>
+  )
 }
 
 export default App;
